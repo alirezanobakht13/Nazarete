@@ -7,21 +7,23 @@ import { BrowserRouter, Route, Router, Routes} from 'react-router-dom';
 import Login from './Pages/Login';
 import HomePage from './Pages/HomePage';
 import SignUp from './Pages/Signup';
+import MainPage from './Pages/MainPage';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <BrowserRouter>
             {/* <App /> */}
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/mainPage" element={<MainPage/>} />
             </Routes>
         </BrowserRouter>
-    </React.StrictMode>
+    // {/* </React.StrictMode> */}
 );
 
 // If you want to start measuring performance in your app, pass a function

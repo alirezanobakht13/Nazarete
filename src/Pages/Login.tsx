@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 
 export default function Login(props?: any) {
 
-    const [invalid,setInvalid] = useState(false)
+    const [invalid, setInvalid] = useState(false)
 
     return (
         <div className="flex flex-col h-screen">
@@ -38,10 +38,10 @@ export default function Login(props?: any) {
                                 </span>
                             </div>
                         </div>
-                        <div className={"flex w-full justify-end mb-1 " + (!invalid? 'hidden':'')}>
-                        <small className="font-normal leading-normal text-red-500">
-                            Username password combination is wrong!
-                        </small>
+                        <div className={"flex w-full justify-end mb-1 " + (!invalid ? 'hidden' : '')}>
+                            <small className="font-normal leading-normal text-red-500">
+                                Username password combination is wrong!
+                            </small>
                         </div>
                         <div className="flex w-full justify-end mt-2">
                             <button className="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none ease-linear transition-all duration-150" type="button">
@@ -49,11 +49,11 @@ export default function Login(props?: any) {
                             </button>
                         </div>
                         <div className="flex w-full justify-end">
-                        <small className="font-normal leading-normal mt-4">
-                            or 
-                            <a href="/signup" className="px-1 underline text-cyan-400 hover:text-cyan-600">Sign up</a>
-                            if you don't have an account.
-                        </small>
+                            <small className="font-normal leading-normal mt-4">
+                                or
+                                <a href="/signup" className="px-1 underline text-cyan-400 hover:text-cyan-600">Sign up</a>
+                                if you don't have an account.
+                            </small>
                         </div>
                     </div>
                 </div>
