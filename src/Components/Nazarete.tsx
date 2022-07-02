@@ -9,9 +9,9 @@ import useAuth from "../hooks/useAuth";
 export default function Nazarete(props?: any) {
 
     const [voteState, setVoteState] = useState(0);
-    const [likeCount, setLikeCount] = useState(10);
-    const [neutralCount, setNeutralCount] = useState(5);
-    const [dislikeCount, setDislikeCount] = useState(34);
+    const [likeCount, setLikeCount] = useState(0);
+    const [neutralCount, setNeutralCount] = useState(0);
+    const [dislikeCount, setDislikeCount] = useState(0);
 
     const [comment, setComment] = useState("")
 
