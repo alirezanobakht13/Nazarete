@@ -1,8 +1,10 @@
 import { findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faR, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { ReactDOM } from "react";
+import useAuth from "../hooks/useAuth";
 
 export default function Nazarete(props?: any) {
 
@@ -11,43 +13,169 @@ export default function Nazarete(props?: any) {
     const [neutralCount, setNeutralCount] = useState(5);
     const [dislikeCount, setDislikeCount] = useState(34);
 
+    const [comment, setComment] = useState("")
+
+    const [commentList, setCommentList] = useState([])
+
+    const { auth }: any = useAuth()
+
+    const url = process.env.REACT_APP_BACKEND_URL
+    const backend = axios.create({ baseURL: url });
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + auth.access_token,
+        }
+    }
+
+    const getComments = () => {
+        backend.get(`post/${props.nazarete_id}/comments/`, config)
+            .then((res) => {
+                console.log(res);
+                setCommentList(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const getVotes = () => {
+        backend.get('post/' + props.nazarete_id, config)
+            .then((res: any) => {
+                console.log(res);
+                setLikeCount(res.data.pos || 0);
+                setNeutralCount(res.data.nat || 0);
+                setDislikeCount(res.data.neg || 0)
+                if (res.data.MyVote === "NULL") {
+                    setVoteState(0);
+                }
+                else if (res.data.MyVote === "NEG") {
+                    setVoteState(1);
+                }
+                else if (res.data.MyVote === "NAT") {
+                    setVoteState(2);
+                }
+                else if (res.data.MyVote === "POS") {
+                    setVoteState(3);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    useEffect(() => {
+        getComments();
+        getVotes();
+    }, [])
+
     const i1 = <i className="far fa-regular fa-thumbs-down text-red-500 text-3xl"></i>;
     const i2 = <h1>shit</h1>;
 
+    const handleCommentClick = () => {
+        console.log(comment)
+        const data = {
+            'post': props.nazarete_id,
+            'text': comment
+        }
+        backend.post('/post/comment/', data, config)
+            .then((res) => {
+                console.log(res);
+                setComment("")
+                setTimeout(getComments, 300);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const handleVoteClick = (vote: string) => {
+        if (voteState === 0) {
+            const data = {
+                "post": props.nazarete_id,
+                "vote": vote
+            }
+
+            backend.post('/post/vote/', data, config)
+                .then((res) => {
+                    console.log(res);
+                    setTimeout(getVotes, 300);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    }
+
 
     return (
-        <section className="w-4/5 lg:w-3/5 mx-auto my-2">
+        <section className="w-4/5 lg:w-2/6 mx-auto my-4">
             <div className="w-full rounded-xl border flex flex-col">
-                <div className="my-3 mx-6 ">
-                    <h4 className="text-3xl font-normal leading-normal mt-0 mb-2">
-                        Title of Nazarete
+                <div className="my-3 mx-6 flex align-middle justify-between items-center">
+                    <h4 className="text-3xl font-normal leading-normal mt-0 mb-1">
+                        {props?.nazarete_title ? props.nazarete_title : "???"}
                     </h4>
+                    <div className="leading-relaxed font-thin">
+                        2/13/2022
+                    </div>
                 </div>
                 <hr />
                 <div className="my-2 mx-6">
-                    <p className="text-lg font-light leading-relaxed mt-0 mb-4 ">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita assumenda quibusdam magni nemo porro laborum illo corporis quos ipsum cumque enim quaerat, dolor nostrum distinctio veniam tenetur mollitia esse fugit nulla! Quis ex ratione nulla sit? Sed impedit dolore, dolores a, asperiores commodi nam expedita autem, tempora harum aperiam accusantium eum aut itaque deserunt sapiente. Ipsum ut velit harum, autem, repudiandae sequi neque alias molestiae facilis, et odio sint fugiat! Consectetur provident voluptates ipsa quis laborum? Ratione sint culpa quisquam voluptate iste reprehenderit similique quae! Sed reprehenderit eveniet vel quod delectus eius libero tempora, non illo fugiat dicta odit nemo?<br />
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quibusdam simfilique, reiciendis autem accusamus nobis suscipit, illo ipsum voluptates saepe quidem distinctio est quod aperiam delectus facere consequatur sit ducimus soluta reprehenderit ullam perferendis tempore corporis voluptatum. Inventore quaerat tempora cum enim. Asperiores, vitae nulla accusamus explicabo consequuntur eligendi provident accusantium ipsam, repellendus illo ad omnis id consectetur? Sit magnam, sequi quasi inventore itaque quisquam pariatur odit natus? Blanditiis delectus suscipit magni ipsam consequuntur ad fugiat numquam cupiditate nihil perferendis! Quae culpa exercitationem maxime voluptatem labore enim aspernatur temporibus autem repellat voluptatum necessitatibus ducimus et quam impedit eaque voluptatibus, consequatur laboriosam molestiae minima sit cumque provident! Quis laudantium quod ea vitae maxime eaque magni aspernatur doloremque optio dolor. Quo sint delectus, atque quos nisi repellat alias a recusandae? Explicabo eligendi, nesciunt, iusto ab accusantium quia delectus eveniet cupiditate nobis eaque quisquam a tempore, amet nam repellendus in libero dolores maiores.<br />
-                        I will be the leader of a company that ends up being worth billions
-                        of dollars, because I got the answers. I understand culture. I am
-                        the nucleus. I think that's a responsibility that I have, to push
-                        possibilities, to show people, this is the level that things could
-                        be at
+                    <p className="text-lg font-light leading-relaxed mt-0 mb-4 whitespace-pre">
+                        {props?.nazarete_desc ? props.nazarete_desc : "???"}
                     </p>
                 </div>
                 <div className="w-full flex">
-                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-3xl rounded-bl-xl hover:border-b-4 hover:border-red-500" onClick={() => { setVoteState(curr => { return curr === 1 ? 0 : 1 }) }}>
+                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-xl border-b-4 hover:border-red-500 border-transparent"
+                        onClick={() => { handleVoteClick("NEG") }}>
                         <i className={`fa-thumbs-down text-red-500 ${voteState === 1 ? "fa" : "far"}`}></i>
-                        <p className="text-base font-light leading-relaxed mt-0 mb-4 text-red-800">{dislikeCount}</p>
+                        <p className="text-sm font-light leading-relaxed mt-0 mb-1 text-red-800">{dislikeCount}</p>
                     </button>
-                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-3xl hover:border-b-4 hover:border-blue-500" onClick={() => { setVoteState(curr => { return curr === 2 ? 0 : 2 }) }}>
+                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-xl border-b-4 hover:border-blue-500 border-transparent"
+                        onClick={() => { handleVoteClick("NAT") }}>
                         <i className={`fa-stop-circle text-blue-500 ${voteState === 2 ? "fa" : "far"}`}></i>
-                        <p className="text-base font-light leading-relaxed mt-0 mb-4 text-blue-800">{neutralCount}</p>
+                        <p className="text-sm font-light leading-relaxed mt-0 mb-1 text-blue-800">{neutralCount}</p>
                     </button>
-                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-3xl rounded-br-xl hover:border-b-4 hover:border-green-500" onClick={() => { setVoteState(curr => { return curr === 3 ? 0 : 3 }) }}>
+                    <button className="w-1/3 pb-2 pt-5 justify-center items-center text-center text-xl border-b-4 hover:border-green-500 border-transparent"
+                        onClick={() => { handleVoteClick("POS") }}>
                         <i className={`fa-thumbs-up text-green-500 ${voteState === 3 ? "fa" : "far"}`}></i>
-                        <p className="text-base font-light leading-relaxed mt-0 mb-4 text-green-800">{likeCount}</p>
+                        <p className="text-sm font-light leading-relaxed mt-0 mb-1 text-green-800">{likeCount}</p>
                     </button>
+                </div>
+                <hr />
+                <div className="mx-6 my-2">
+                    <div className="flex justify-between">
+                        <input value={comment} type={"text"} placeholder="Add comment ..." className="w-full border-b-2 hover:border-b-2 p-1 outline-none mr-3"
+                            onChange={(e) => {
+                                setComment(e.target.value);
+                            }} />
+                        <button onClick={handleCommentClick}>
+                            <i className="fa fa-arrow-right text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div className="mt-1">
+                        {commentList.map((com: any, i) => {
+                            return (
+                                <div className="flex justify-between items-center">
+                                    <div className="leading-relaxed font-light text-sm pr-2" >
+                                        <span className="font-semibold">{com.user.username} </span>
+                                        {com.text}
+                                    </div>
+                                    <div className="leading-relaxed font-thin text-xs">
+                                        {(new Date(com.createdAt)).toLocaleDateString()}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        {/* <div className="flex justify-between items-center">
+                            <div className="leading-relaxed font-light text-sm pr-2" >
+                                <span className="font-semibold">Username </span>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error corrupti qui ipsum quo.
+                            </div>
+                            <div className="leading-relaxed font-thin text-xs">
+                                2/13/2022
+                            </div>
+                        </div> */}
+                    </div>
                 </div>
             </div>
         </section>

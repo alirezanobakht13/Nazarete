@@ -10,6 +10,7 @@ import SignUp from './Pages/Signup';
 import MainPage from './Pages/MainPage';
 import { AuthProvider } from './Context/AuthProvider';
 import RequireAuth from './Components/RequireAuth';
+import NewNazarete from './Pages/NewNazarete';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -23,6 +24,7 @@ root.render(
                     <Route element={<RequireAuth />}>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/mainPage" element={<HomePage />} />
+                        <Route path="/newNazarete" element={<NewNazarete />} />
                     </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
