@@ -28,6 +28,7 @@ export default function Header(porps?: any) {
                         onClick={() => {
                             console.log("logout clicked")
                             setAuth({});
+                            localStorage.removeItem("auth");
                             navigate('/login')
                         }}>
                         logout

@@ -32,6 +32,7 @@ export default function Login(props?: any) {
         backend.post("/user/login", data)
             .then((res) => {
                 setAuth(res.data)
+                localStorage.setItem("auth",JSON.stringify(res.data));
                 console.log(res.data)
                 console.log(auth)
                 setAccepted(true);
