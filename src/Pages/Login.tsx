@@ -49,7 +49,7 @@ export default function Login(props?: any) {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex justify-center items-center grow">
-                <div id="form" className="flex md:w-1/2 w-10/12 max-w-lg flex-col">
+                <div id="form" className="flex md:w-1/2 w-10/12 max-w-lg flex-col bg-white rounded-xl px-3 shadow-xl">
                     <h1 className="text-center text-6xl font-normal leading-normal mt-0 mb-10 text-blueGray-800">
                         Login
                     </h1>

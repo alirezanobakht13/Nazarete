@@ -57,8 +57,8 @@ export default function NewNazarete(props?: any) {
             </div>
             <div className="w-full flex grow items-center">
                 <div className="w-4/5 lg:w-3/6 mx-auto">
-                    <div className="w-full flex flex-col">
-                        <div className="w-full rounded-xl border flex flex-col my-3">
+                    <div className="w-full flex flex-col bg-white rounded-xl px-5 shadow-xl">
+                        <div className="w-full rounded-xl flex flex-col my-3">
                             <div className="my-3 mx-6 flex align-middle justify-between items-center">
                                 <input type={"text"} placeholder="Nazerete Title" className="text-3xl font-normal leading-normal mt-0 mb-1 outline-none pr-3 w-full"
                                     onChange={(e) => {

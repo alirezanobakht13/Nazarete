@@ -108,18 +108,18 @@ export default function Nazarete(props?: any) {
 
 
     return (
-        <section className="w-4/5 lg:w-2/6 mx-auto my-4">
-            <div className="w-full rounded-xl border flex flex-col">
-                <div className="my-3 mx-6 flex align-middle justify-between items-center">
-                    <h4 className="text-3xl font-normal leading-normal mt-0 mb-1">
+        <section className="w-4/5 lg:w-2/6 mx-auto my-4 ">
+            <div className="w-full rounded-xl border flex flex-col bg-white border-0">
+                <div className="py-3 px-6 flex align-middle justify-between items-center bg-indigo-500 rounded-t-xl">
+                    <h4 className="text-3xl font-normal leading-normal mt-0 mb-1 text-white">
                         {props?.nazarete_title ? props.nazarete_title : "???"}
                     </h4>
-                    <div className="leading-relaxed font-thin">
+                    <div className="leading-relaxed font-thin text-white">
                         2/13/2022
                     </div>
                 </div>
                 <hr />
-                <div className="my-2 mx-6">
+                <div className="py-2 px-6">
                     <p className="text-lg font-light leading-relaxed mt-0 mb-4 whitespace-pre">
                         {props?.nazarete_desc ? props.nazarete_desc : "???"}
                     </p>

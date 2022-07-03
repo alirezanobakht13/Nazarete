@@ -3,7 +3,7 @@ import { ReactDOM } from "react";
 
 export default function Footer(porps?: any) {
     return (
-        <footer className="w-full py-1 px-3 bg-blue-500 flex justify-between items-center">
+        <footer className="w-full py-1 px-3 bg-indigo-900 flex justify-between items-center">
             <div className="flex flex-col text-white mr-1">
                 <div className="items-center text-lg">
                     <span className="pr-1 font-normal leading-normal">
@@ -20,7 +20,7 @@ export default function Footer(porps?: any) {
                 <small className="font-semibold">Developed by:</small>
                 <div className="flex flex-wrap">
                 <small className="px-1 font-normal leading-normal">Sepehr Ganji</small>
-                <small className="px-1 font-normal leading-normal">Sana mehrab beigi</small>
+                <small className="px-1 font-normal leading-normal">Sana Mehrabbeigi</small>
                 <small className="px-1 font-normal leading-normal">Alireza Nobakht</small>
                 </div>
             </div>

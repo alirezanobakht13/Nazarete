@@ -56,8 +56,8 @@ export default function MainPage(props?: any) {
             </div>
             <div className="overflow-auto w-full grow flex flex-col">
                 <div className="w-full mb-3 mt-6 w-4/5 lg:w-2/6 mx-auto">
-                    <div className="flex justify-between rounded-xl border">
-                        <input placeholder="Search ..." className="my-2 mr-3 ml-2 pl-3 py-1 w-full outline-none"
+                    <div className="flex justify-between rounded-xl border bg-indigo-50">
+                        <input placeholder="Search ..." className="my-2 mr-3 ml-2 pl-3 py-1 w-full outline-none bg-indigo-50"
                         onChange={(e)=>{
                             setSearch(e.target.value);
                             handleSearch(e.target.value);

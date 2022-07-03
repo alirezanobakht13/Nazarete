@@ -10,6 +10,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("../src/assets/aaa.jpg");
+  background-size: cover;
+  backdrop-filter: blur(16px);
 }
 
 code {

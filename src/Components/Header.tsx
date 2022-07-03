@@ -10,7 +10,7 @@ export default function Header(porps?: any) {
     const navigate = useNavigate()
 
     return (
-        <header className="w-full shadow-md py-1 flex">
+        <header className="w-full shadow-md py-1 flex bg-indigo-50">
             <div className="w-full py-1 px-3 flex justify-between items-center">
                 <div className="text-xl font-normal leading-normal">
                     <button className="font-semibold hover:text-gray-600"
